@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Make a webpage</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.classless.min.css">
+  <style>
+  textarea {font-family: monospace}
+  </style>
+  </head>
+
+<body>
+<header>
+  <h1>Make a webpage</h1>
+
+  <p>This will take the things you type in the three fields below and build you an HTML file. <mark>Nothing you enter is sent to any server</mark>.</p>
+
+  <p>(You can leave any field blank if you like. Placeholders will be added)</p>
+</header>
+  <main>
+
+  <form>
+    <p><label>Page title
+    <input type="text" id="title" size='50' maxlength="100"></label></p>
+
+    <p><label>CSS styling
+      <textarea id="css" cols="40" rows="5"></textarea></label></p>
+
+      <p><label>Page content
+      <textarea id="content" cols="40" rows="5"></textarea></label></p>
+
+
+      <input id="downloadButton" type="button" value="Download this HTML page">
+
+
+  </form>
+
+<script>
+
+// based on https://stackoverflow.com/a/79383186
+
+ document.getElementById('downloadButton').addEventListener('click', () => {
+     // File content and filename
+
+     var title = document.getElementById('title').value;
+     var css = document.getElementById('css').value;
+     var content = document.getElementById('content').value;
+
+     if (!title) { title = "example";}
+     if (!css) { css = "header{background-color: black; color: white}footer{background-color: navy; color: yellow;}body{background-color: whitesmoke; color: #111;}"}
+     if (!content) { content = "Welcome to my website. Here is a link to someone <a href='https://mat.tl'>mattl</a> and here is <a href='https://indieweb.org/'>a link to the IndieWeb wiki</a>"}
+
+
+     const fileContent = "<!DOCTYPE html><html><head><title>" + title + "</title><style>/* add your own CSS styles here */" + css + "</style><meta name='viewport' content='width=device-width, initial-scale=1'><meta charset='utf-8'></head><body><header><h1>" + title + "</h1></header><main>" + content + "</main><footer>Add footer content here</footer></body></html>";
+     const fileName = title + ".html";
+
+     // Create a Blob object with the file content
+     const blob = new Blob([fileContent], { type: 'text/plain' });
+
+     // Create a temporary link element
+     const link = document.createElement('a');
+     link.href = URL.createObjectURL(blob);
+     link.download = fileName;
+
+     // Programmatically click the link to trigger the download
+     link.click();
+
+     // Clean up the URL object
+     URL.revokeObjectURL(link.href);
+ });
+
+</script>
+
+  </main>
+  <footer>
+  <p>Single page creator by <a href='https://mat.tl/'>Matt Lee</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> with contributions from StackOverflow.</p>
+
+  <p><a href="https://github.com/mattl/simple-html-file-generator">Get the latest version from GitHub</a></p>
+  </footer>
+
+</body>
+
+</html>
