@@ -65,7 +65,7 @@
 
      if (!title) { title = "My fantastic website";}
      if (!css) { css = "\r\nheader{background-color: black; color: white; padding: 1em;}footer{background-color: red; color: white; padding: 1em;}body{background-color: whitesmoke; color: #111; font-family: sans-serif;} main{padding: 1em;}"}
-     if (!content) { content = "Welcome to my website. Here is a link to mattl's website <a href='https://mat.tl'>mattl</a> and here is <a href='https://indieweb.org/'>a link to the IndieWeb wiki</a>"}
+     if (!content) { content = "Welcome to my website. Here is a link to mattl's website <a href='https://mat.tl'>mattl</a> and here is <a href='https://indieweb.org/'>a link to the IndieWeb wiki</a><figure><img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Sheba1.JPG' alt='British Shorthair cat' width='300'><figcaption>British shorthair cat</figcaption></figure>"}
 
 
      const fileContent = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<title>" + title + "</title>\r\n<style>\r\n/* add your own CSS styles here */" + css + "</style>\r\n<meta name='viewport' content='width=device-width, initial-scale=1'>\r\n<meta name='generator' content='https://mattl.github.io/simple-html-file-generator/'>\r\n<meta charset='utf-8'>\r\n</head>\r\n<body>\r\n<header>\r\n<h1>" + title + "</h1>\r\n</header>\r\n<main>\r\n" + content + "</main>\r\n<footer>\r\n&copy; 2025 " + title + ". Some rights reserved.\r\n</footer>\r\n</body>\r\n</html>";
