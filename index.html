@@ -63,12 +63,12 @@
      var css = document.getElementById('css').value;
      var content = document.getElementById('content').value;
 
-     if (!title) { title = "example";}
-     if (!css) { css = "header{background-color: black; color: white; padding: 1em;}footer{background-color: red; color: white; padding: 1em;}body{background-color: whitesmoke; color: #111; font-family: sans-serif;} main{padding: 1em;}"}
+     if (!title) { title = "My fantastic website";}
+     if (!css) { css = "\r\nheader{background-color: black; color: white; padding: 1em;}footer{background-color: red; color: white; padding: 1em;}body{background-color: whitesmoke; color: #111; font-family: sans-serif;} main{padding: 1em;}"}
      if (!content) { content = "Welcome to my website. Here is a link to mattl's website <a href='https://mat.tl'>mattl</a> and here is <a href='https://indieweb.org/'>a link to the IndieWeb wiki</a>"}
 
 
-     const fileContent = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<title>" + title + "</title>\r\n<style>\r\n/* add your own CSS styles here */" + css + "</style>\r\n<meta name='viewport' content='width=device-width, initial-scale=1'>\r\n<meta charset='utf-8'>\r\n</head>\r\n<body>\r\n<header>\r\n<h1>" + title + "</h1>\r\n</header>\r\n<main>\r\n" + content + "</main>\r\n<footer>\r\nAdd footer content here\r\n</footer>\r\n</body>\r\n</html>";
+     const fileContent = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<title>" + title + "</title>\r\n<style>\r\n/* add your own CSS styles here */" + css + "</style>\r\n<meta name='viewport' content='width=device-width, initial-scale=1'>\r\n<meta name='generator' content='https://mattl.github.io/simple-html-file-generator/'>\r\n<meta charset='utf-8'>\r\n</head>\r\n<body>\r\n<header>\r\n<h1>" + title + "</h1>\r\n</header>\r\n<main>\r\n" + content + "</main>\r\n<footer>\r\n&copy; 2025 " + title + ". Some rights reserved.\r\n</footer>\r\n</body>\r\n</html>";
      const fileName = title + ".html";
 
      // Create a Blob object with the file content
