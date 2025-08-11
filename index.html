@@ -21,23 +21,34 @@
 
   <p>(You can leave any field blank if you like. Placeholders will be added)</p>
 
+  <details>
+    <summary>Show/hide Preview</summary>
+  <iframe id="preview" style="width: 100%; min-height: 20em;">
+  </iframe>
+  </details>
+
+
+
 </header>
   <main>
 
   <form>
+
+    <input id="downloadButton" type="button" value="Download this HTML page">
+
+
     <p><label>Page title
-    <input type="text" id="title" placeholder="My fantastic website" size='50' maxlength="100"></label></p>
+    <input type="text" id="title" placeholder="My fantastic website" size='50' maxlength="100" onblur="preview()"></label></p>
 
     <p><label>CSS styling
-      <textarea id="css" cols="40" rows="5" placeholder="body {color: red;}"></textarea></label></p>
+      <textarea id="css" cols="40" rows="5" placeholder="body {color: red;}" onfocusout="preview()"></textarea></label></p>
 
       <p><label>Page content
       <textarea id="content" cols="40" rows="5" placeholder="<h2>Hello world</h2>
 
-<p>My favorite food is pizza</p>"></textarea></label></p>
+<p>My favorite food is pizza</p>" onfocusout="preview()"></textarea></label></p>
 
 
-      <input id="downloadButton" type="button" value="Download this HTML page">
 
 
   </form>
@@ -54,25 +65,77 @@
 
 <script>
 
+function doThings(title, css, content) {
+
+
+
+
+   var fileContent = "<!DOCTYPE html>\r\n<html lang='en'>\r\n<head>\r\n<title>" + title + "</title>\r\n<style>\r\n/* add your own CSS styles here */" + css + "</style>\r\n<meta name='viewport' content='width=device-width, initial-scale=1'>\r\n<meta name='generator' content='https://mattl.github.io/simple-html-file-generator/'>\r\n<meta charset='utf-8'>\r\n</head>\r\n<body>\r\n<header>\r\n<h1>" + title + "</h1>\r\n</header>\r\n<main>\r\n" + content + "</main>\r\n<footer>\r\n&copy; 2025 " + title + ". Some rights reserved.\r\n</footer>\r\n</body>\r\n</html>";
+
+   return fileContent;
+}
+
+function getTitle() {
+
+  var title = document.getElementById('title').value;
+  if (!title) { title = "My fantastic website";}
+
+  return title;
+
+}
+
+function getCSS() {
+  var css = document.getElementById('css').value;
+  if (!css) { css = "\r\nheader{min-height: 3em; background-color: orange; color: black; text-align: center; padding: 1em;}footer{min-height: 3em; text-align: center; background-color: black; color: white; padding: 1em;}html,body{margin: 0; padding: 0;}body{background-color: whitesmoke; color: #111; font-family: sans-serif;} main{overflow: auto; padding: 1em;}figure{float: right; max-width: 350px; border: 1px solid #ccc; padding: 1em; text-align: center;}"}
+
+  return css;
+
+
+}
+
+function preview() {
+  title = getTitle();
+  css = getCSS();
+  content = getContent();
+
+   // File content and filename
+
+   var fileContent = doThings(title, css, content);
+
+// document.getElementById('preview').contentWindow.document.write("hello");
+document.getElementById('preview').contentWindow.document.close();
+document.getElementById('preview').contentWindow.document.write(fileContent);
+
+}
+
+function getContent(){
+
+  var content = document.getElementById('content').value;
+
+
+   if (!content) { content = "<h2>Welcome to my website.</h2>\r\n<p>My favorite food is pizza</p>\r\n<h3>Some websites I like</h3>\r\n<ul>\r\n<li><a href='https://mat.tl'>Matt Lee</a></li>\r\n<li><a href='https://indieweb.org/'>IndieWeb wiki</a></li>\r\n</ul>\r\n<figure>\r\n<img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Sheba1.JPG' alt='British Shorthair cat' width='300'>\r\n<figcaption>British shorthair cat</figcaption>\r\n</figure><p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n"}
+
+   return content;
+
+}
+
 // based on https://stackoverflow.com/a/79383186
 
  document.getElementById('downloadButton').addEventListener('click', () => {
+
+
+    title = getTitle();
+    css = getCSS();
+    content = getContent();
+
      // File content and filename
 
-     var title = document.getElementById('title').value;
-     var css = document.getElementById('css').value;
-     var content = document.getElementById('content').value;
+     var fileContent = doThings(title, css, content);
 
-     if (!title) { title = "My fantastic website";}
-     if (!css) { css = "\r\nheader{min-height: 3em; background-color: orange; color: black; text-align: center; padding: 1em;}footer{min-height: 3em; text-align: center; background-color: black; color: white; padding: 1em;}html,body{margin: 0; padding: 0;}body{background-color: whitesmoke; color: #111; font-family: sans-serif;} main{overflow: auto; padding: 1em;}figure{float: right; max-width: 350px; border: 1px solid #ccc; padding: 1em; text-align: center;}"}
-     if (!content) { content = "<h2>Welcome to my website.</h2>\r\n<p>My favorite food is pizza</p>\r\n<h3>Some websites I like</h3>\r\n<ul>\r\n<li><a href='https://mat.tl'>Matt Lee</a></li>\r\n<li><a href='https://indieweb.org/'>IndieWeb wiki</a></li>\r\n</ul>\r\n<figure>\r\n<img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Sheba1.JPG' alt='British Shorthair cat' width='300'>\r\n<figcaption>British shorthair cat</figcaption>\r\n</figure><p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n<p>My favorite food is pizza</p>\r\n"}
-
-
-     const fileContent = "<!DOCTYPE html>\r\n<html lang='en'>\r\n<head>\r\n<title>" + title + "</title>\r\n<style>\r\n/* add your own CSS styles here */" + css + "</style>\r\n<meta name='viewport' content='width=device-width, initial-scale=1'>\r\n<meta name='generator' content='https://mattl.github.io/simple-html-file-generator/'>\r\n<meta charset='utf-8'>\r\n</head>\r\n<body>\r\n<header>\r\n<h1>" + title + "</h1>\r\n</header>\r\n<main>\r\n" + content + "</main>\r\n<footer>\r\n&copy; 2025 " + title + ". Some rights reserved.\r\n</footer>\r\n</body>\r\n</html>";
      const fileName = title + ".html";
 
      // Create a Blob object with the file content
-     const blob = new Blob([fileContent], { type: 'text/plain' });
+     const blob = new Blob([fileContent], { type: 'text/html' });
 
      // Create a temporary link element
      const link = document.createElement('a');
@@ -87,6 +150,8 @@
  });
 
 </script>
+
+
 
   </main>
   <footer>
