@@ -4,9 +4,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <title>Let's make a simple webpage!</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.classless.min.css">
   <style>
+     body{font-size: 16pt; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 1.5em; line-height: 1.8em;}
+a{font-weight: bold;}
+a:hover{color: red; background-color: yellow;}
+
+@media (prefers-color-scheme: dark) {
+  body {
+background: #111;
+color: whitesmoke;
+}
+
+a {color: lime;}
+
+}
   textarea {font-family: monospace}
+    label {display: block;}
   </style>
   </head>
 
